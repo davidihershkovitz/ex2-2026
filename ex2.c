@@ -11,10 +11,10 @@ int main()
 {
     int choice = 0;
     while (1) {
-        printf("Welcome to our game, please choose an option:\n");
-        printf("1. Ducky’s Unity Game\n");
+        printf("Welcome to our games, please choose an option:\n");
+        printf("1. Ducky's Unity Game\n");
         printf("2. The Memory Game\n");
-        printf("3. Professor Pat’s Power Calculation\n");
+        printf("3. Professor Pat's Power Calculation\n");
         printf("4. The Duck Parade\n");
         printf("5. The Mystery of the Repeated Digits\n");
         printf("6. Good Night Ducks\n");
@@ -22,7 +22,7 @@ int main()
         scanf("%d", &choice);
 
         if (choice < 1 || choice > 6) {
-            printf("invalid option, please try again.\n");
+            printf("Invalid option, please try again\n");
             continue;
         }
 
@@ -41,7 +41,7 @@ int main()
                 num = num >> 1;
             }
 
-            printf("Ducky earns %d corns", count);
+            printf("Ducky earns %d corns\n", count);
             break;
 
         case 2:
@@ -54,7 +54,7 @@ int main()
                 printf("Invalid number, please try again\n");
                 scanf("%d", &numDucks);
             }
-
+            printf("you entered %d ducks\n", numDucks);
             for(int i = 1; i <= numDucks; i++){
                 printf("duck %d do QUAK? 1 for yes, 0 for no\n", i);
                 scanf("%d", &user);
@@ -112,7 +112,7 @@ int main()
         case 4:
             int duckNum = 0;
 
-            printf("please enter number of ducks\n");
+            printf("please enter number of ducks:\n");
             scanf("%d", &duckNum);
             while(duckNum < 0){
                 printf("Invalid number, please try again\n");
