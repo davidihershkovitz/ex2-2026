@@ -5,7 +5,7 @@ Assignment: ex2
 *******************/
 
 #include <stdio.h>
-#define NEWLINE 10
+#define NEWLINE 10 //skip to the next row (only 10 ducks permitted per row)
 
 int main()
 {
@@ -18,7 +18,7 @@ int main()
         printf("4. The Duck Parade\n");
         printf("5. The Mystery of the Repeated Digits\n");
         printf("6. Good Night Ducks\n");
-
+        //printing the menu again and again
         scanf("%d", &choice);
 
         if (choice < 1 || choice > 6) {
@@ -28,161 +28,150 @@ int main()
 
         switch (choice) {
         case 1:
-            int num, count = 0;
-            printf("please enter a positive number:\n");
-            scanf("%d", &num);
-            while (num <= 0) {
-                printf("Invalid number, please try again\n");
+                int num, count = 0;
+                printf("please enter a positive number:\n");
                 scanf("%d", &num);
-            }
+                while (num <= 0) {
+                    printf("Invalid number, please try again\n");
+                    scanf("%d", &num);
+                }//validate the input
 
-            while(num != 0){
-                if(num & 1) count++;
-                num = num >> 1;
-            }
+                while(num != 0){
+                    if(num & 1) count++;
+                    num = num >> 1;
+                } // check the last bit and shift right
 
-            printf("Ducky earns %d corns\n", count);
-            break;
+                printf("Ducky earns %d corns\n", count);
+                break;
+
 
         case 2:
-            unsigned long long ducks = 0;
-            int numDucks = 0;
-            int user;
-            printf("please enter the number of ducks:\n");
-            scanf("%d", &numDucks);
-            while(numDucks <= 0){
-                printf("Invalid number, please try again\n");
+                unsigned long long ducks = 0;
+                int numDucks = 0;
+                int user;
+                printf("please enter the number of ducks:\n");
+
                 scanf("%d", &numDucks);
-            }
-            printf("you entered %d ducks\n", numDucks);
-            for(int i = 1; i <= numDucks; i++){
-                printf("duck %d do QUAK? 1 for yes, 0 for no\n", i);
-                scanf("%d", &user);
-
-                while(user != 0 && user != 1){
+                while(numDucks <= 0){
                     printf("Invalid number, please try again\n");
+                    scanf("%d", &numDucks);
+                } //validate the input
+                printf("you entered %d ducks\n", numDucks);
+                for(int i = 1; i <= numDucks; i++){
+                    printf("duck %d do QUAK? 1 for yes, 0 for no\n", i);
                     scanf("%d", &user);
+
+                    while(user != 0 && user != 1){
+                        printf("Invalid number, please try again\n");
+                        scanf("%d", &user);
+                    }//validate that the user entered only 0 or 1
+
+                    ducks = (ducks << 1) | user;
                 }
 
-                ducks = (ducks << 1) | user;
-            }
+                for(int i = numDucks - 1; i >= 0; i--){
+                    int b = (ducks >> i) & 1;
+                    if(b){
+                        printf("duck number %d do Quak\n", numDucks - i);
+                    }
+                    else {
+                        printf("duck number %d do Sh...\n", numDucks - i);
+                    }
+                }//checking via for loop from the last duck and gives output accordingly
+                break;
 
-            for(int i = numDucks - 1; i >= 0; i--){
-                int b = (ducks >> i) & 1;
-                if(b){
-                    printf("duck number %d do Quak\n", numDucks - i);
-                }
-                else {
-                    printf("duck number %d do Sh...\n", numDucks - i);
-                }
-            }
-            break;
 
         case 3:
-            long long base;
-            long long exp;
-            long long res = 1;
+                long long base;
+                long long exp;
+                long long res = 1;
 
-            printf("please enter the number\n");
-            scanf("%lld", &base);
-            while(base < 0){
-                printf("Invalid input, please try again\n");
+                printf("please enter the number\n");
                 scanf("%lld", &base);
-            }
+                while(base < 0){
+                    printf("Invalid input, please try again\n");
+                    scanf("%lld", &base);
+                }//validate the input
 
-            printf("please enter the exponent\n");
-            scanf("%lld", &exp);
-            while(exp < 0){
-                printf("Invalid input, please try again\n");
+                printf("please enter the exponent\n");
                 scanf("%lld", &exp);
-            }
-
-            if(exp == 0){
-                printf("your power is: 1\n");
-            }
-
-            if(exp != 0){
-                for(int i = 0; i < exp; i++){
-                    res = res * base;
+                while(exp < 0){
+                    printf("Invalid input, please try again\n");
+                    scanf("%lld", &exp);
                 }
-                printf("your power is: %lld\n", res);
-            }
-            break;
+
+                if(exp == 0){
+                    printf("your power is: 1\n");
+                }
+
+                if(exp != 0){
+                    for(int i = 0; i < exp; i++){
+                        res = res * base;
+                    }//do the math for the power without math.h :)
+                    printf("your power is: %lld\n", res);
+                }
+                break;
+
 
         case 4:
-            int duckNum = 0;
+                int duckNum = 0;
 
-            printf("please enter number of ducks:\n");
-            scanf("%d", &duckNum);
-            while(duckNum < 0){
-                printf("Invalid number, please try again\n");
+                printf("please enter number of ducks:\n");
                 scanf("%d", &duckNum);
-            }
-            for(int firstDuck = 0; firstDuck < duckNum; firstDuck += NEWLINE)
-            {
-                for(int i = firstDuck; i < firstDuck + NEWLINE && i < duckNum; i++) {
-                    printf("   _\t\t");
-                }
-                printf("\n");
+                while(duckNum < 0){
+                    printf("Invalid number, please try again\n");
+                    scanf("%d", &duckNum);
+                }//validate the input
+                for(int firstDuck = 0; firstDuck < duckNum; firstDuck += NEWLINE)
+                {
+                    for(int i = firstDuck; i < firstDuck + NEWLINE && i < duckNum; i++) {
+                        printf("   _\t\t");
+                    }
+                    printf("\n");
 
-                for(int i = firstDuck; i < firstDuck + NEWLINE && i < duckNum; i++) {
-                    printf("__(o)>\t\t");
-                }
-                printf("\n");
+                    for(int i = firstDuck; i < firstDuck + NEWLINE && i < duckNum; i++) {
+                        printf("__(o)>\t\t");
+                    }
+                    printf("\n");
 
-                for(int i = firstDuck; i < firstDuck + NEWLINE && i < duckNum; i++) {
-                    printf("\\___)\t\t");
-                }
-                printf("\n");
-            }
-            break;
+                    for(int i = firstDuck; i < firstDuck + NEWLINE && i < duckNum; i++) {
+                        printf("\\___)\t\t");
+                    }
+                    printf("\n");
+                }//skip a row every 10 ducks and print each line for every for loop
+                break;
+
 
         case 5:
-            int secret, digit, tmp, found;
+                int secret, digit, tmp, found;
 
-            printf("please enter number\n");
-            scanf("%d", &secret);
-            while (secret <= 0) {
-                printf("Invalid number, please try again\n");
+                printf("please enter number\n");
                 scanf("%d", &secret);
-            }
-            while (secret != 0) {
-                digit = secret % 10;
-                tmp = secret / 10;
-                found = 0;
-                while (tmp != 0) {
-                    if (tmp % 10 == digit) {
-                        found = 1;
+                while (secret <= 0) {
+                    printf("Invalid number, please try again\n");
+                    scanf("%d", &secret);
+                }//validate the input
+                while (secret != 0) {
+                    digit = secret % 10;
+                    tmp = secret / 10;
+                    found = 0;
+                    while (tmp != 0) {
+                        if (tmp % 10 == digit) {
+                            found = 1;
+                        }
+                        tmp /= 10;
+                    }//using the while loop for the reading the last digit and then remove it and print it accordinly
+                    if (found) {
+                        printf("%d appears more than once!\n", digit);
                     }
-                    tmp /= 10;
+                    secret /= 10;
                 }
-                if (found) {
-                    printf("%d appears more than once!\n", digit);
-                }
-                secret /= 10;
-            }
-            break;
+                break;
 
         case 6:
-            printf("Good night! See you at the pond tomorrow.\n");
-            return 0;
+                printf("Good night! See you at the pond tomorrow.\n");
+                return 0;
+
         }
     }
-    // MAIN MENU LOOP
-
-    // TASK 1: Ducky's Unity Game
-
-    // TASK 2: The Memory Game
-
-    // TASK 3: Professor Pat's Power Calculation
-
-    // TASK 4: The Duck Parade
-
-    // TASK 5: The Mystery of the Repeated Digits
-
-    // TASK 6: EXIT
-
-    // dont forget through all the necessary parts to validate invalid input.
-
-    return 0;
 }
